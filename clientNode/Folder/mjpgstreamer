@@ -1,0 +1,77 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:        MJPG-streamer
+# Required-Start:  $network $remote_fs $syslog
+# Required-Stop:   $network $remote_fs $syslog
+# Default-Start:   2 3 4 5
+# Default-Stop:    0 1 6
+# Short-Description: Starts webcam over mjpeg streamer
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+. /lib/lsb/init-functions
+
+#Declaration of vairables
+videoDev=/dev/video0
+#resolution= 700 x 400
+videoStream=/var/www/html/staticDCMS/includes/mjpg-streamer
+videoScript=$videoStream/mjpg_streamer
+
+test -x $videoScript || exit 5
+
+
+case $1 in
+         another)
+                log_daemon_msg "Starting MJPG-streamer" ""
+                $videoStream/mjpg_streamer -i "$videoStream/input_uvc.so -d $videoDev -y -f 177 -r 700x400 " -o "$videoStream/output_http.so -p 8050 -n" -b &
+                status=$?
+                log_end_msg $status
+                ;;
+
+        start)
+                log_daemon_msg "Starting MJPG-streamer" ""
+                $videoStream/mjpg_streamer -i "$videoStream/input_uvc.so -d $videoDev -y -f 177 -r 700x400 " -o "$videoStream/output_http.so -p 8050 -n" -b &
+                status=$?
+                log_end_msg $status
+                ;;
+                
+        stop)
+                log_daemon_msg "Stopping MJPG-streamer" ""
+                #killall $videoStream/mjpg_streamer
+                killall mjpg_streamer
+                log_end_msg $?
+                ;;
+                
+        restart|force-reload)
+                log_daemon_msg "Restarting MJPG-streamer" ""
+                #killall $videoStream/mjpg_streamer
+                killall -9 mjpg_streamer
+                sleep 1
+                $videoStream/mjpg_streamer -i "$videoStream/input_uvc.so -d $videoDev -y -f 177 -r 700x400 " -o "$videoStream/output_http.so -p 8050 -n" -b &
+                status=$?
+                log_end_msg $status
+                ;;
+                
+        try-restart)
+                if $0 status >/dev/null; then
+                        $0 restart
+                else
+                        exit 0
+                fi
+                ;;
+                
+        reload)
+                exit 3
+                ;;
+                
+        status)
+                status_of_proc $videoScript "MJPG-streamer"
+                ;;
+        *)
+                echo "Usage: $0 {start|stop|restart|try-restart|force-reload|status}"
+                exit 2
+                ;;
+         
+esac
+

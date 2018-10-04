@@ -1,0 +1,57 @@
+	<div id="mainheader">
+		
+		<script>
+
+		   var ipAddress = "10.127.8.191";
+		 //  var xentrinoPath = "http://" +ipAddress" + ":4000/xentrino/aquisition.html";
+		 //  var chrisdonPath = "http://" +ipAddress" + ":4000/chrisdon/aquisition.html";
+		 //  var macronPath = "http://" +ipAddress" + ":4000/macron/aquisition.html";
+		 //  document.getElementById("menu-miniserver").setAttribute("href",xentrinoPath);
+		 //  document.getElementById("menu-chrisbot").setAttribute("href",macronPath);
+		 //  document.getElementById("menu-macrobot").setAttribute("href",chrisdonPath);
+
+
+
+		//  alert(chrisdonPath);
+	 
+	//	var ipAddress = "10.127.8.208";
+                 var link1 = document.getElementById('menu-chrisbot');
+                 link1.setAttribute('href',ipAddress);
+                 alert(link1.getAttribute('href'));
+
+		</script>
+			
+						<!--Banner-->
+						<div id="banner">
+							<div id="login">
+								<a href="#">Login</a>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<!--Navigation menu-->
+						<div id="main_navigation">
+								<!--HOME ABOUT PROJECTS CONTACT ADMIN-->
+						 <ul id="nav" class="menu">
+									<!-- globalPath= "/localhost/staticDCMS/includes/"  -->
+									<li><a href="http://localhost/staticIS295B/includes/main/home.php">HOME</a><div class="hline"></div></li>
+									<li><a href="http://localhost/staticIS295B/includes/main/about.php">ABOUT</a><div class="hline"></div>
+									    <ul>
+						                 <li><a href= "http://localhost/staticIS295B/includes/main/about.php" id="menu-miniserver"> OVERVIEW</a></li><div class="vline"></div>
+						                <li><a href="?action=chrisdonbot-aquisition" id="menu-chrisbot">AUTHOR</a></li><div class="vline"></div>
+					                   </ul>
+					                </li>   
+								<li><a href="http://localhost/staticIS295B/includes/main/projects.php">IS295B REMOTE</a><div class="hline"></div>
+									<ul>
+										<li><a href="" id="menu-miniserver">Xentrino</a></li><div class="vline"></div>
+										<li><a href="" id="menu-chrisbot">CrisDonBot</a></li><div class="vline"></div>
+										<li><a href="" id="menu-macrobot">MacroBot</a></li>	
+									</ul>
+								</li>
+									 <li><a href="http://localhost/staticIS295B/includes/main/report.php">DATA AQUISITIONS</a><div class="hline"></div></li>
+				                    <li><a  href="http://localhost/staticIS295B/includes/main/admin.php">CONTROL PANEL</a></li>
+                               <!-- <li><a href="<?php echo $globalPath.'main/index.php';?>">ADMIN</a></li>-->
+						  </ul> <!--NAV-MENU -->
+						<div class="clear"></div>
+					  </div>
+					<div class="divider"></div>
+				</div>

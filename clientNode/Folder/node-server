@@ -1,0 +1,71 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:        MJPG-streamer
+# Required-Start:  $network $remote_fs $syslog
+# Required-Stop:   $network $remote_fs $syslog
+# Default-Start:   2 3 4 5
+# Default-Stop:    0 1 6
+# Short-Description: Starts webcam over mjpeg streamer
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+. /lib/lsb/init-functions
+
+#Declaration of vairables
+#videoDriver=/dev/video1
+#resolution= 700 x 400
+#$nodePort= 777
+nodePath=/var/www/html/staticDCMS/includes/main/termulator
+nodeRun=$nodePath/app.js
+
+test -x $nodeRun || exit 5
+
+
+case $1 in
+        start)
+                log_daemon_msg "Starting Termulator" ""
+                node  "/var/www/html/staticDCMS/includes/main/termulator/app.js" -p "777" &
+                status=$?
+                log_end_msg $status
+                ;;
+                
+        stop)
+                log_daemon_msg "Stopping Termulator" ""
+                #killall $videoStream/mjpg_streamer
+                killall -9 node
+                log_end_msg $?
+                ;;
+                
+        restart|force-reload)
+                log_daemon_msg "Restarting Termulator" ""
+                #killall $videoStream/mjpg_streamer
+                killall -9 node
+                sleep 1
+                node  $nodeRun -p 777 &
+                status=$?
+                log_end_msg $status
+                ;;
+                
+        try-restart)
+                if $0 status >/dev/null; then
+                        $0 restart
+                else
+                        exit 0
+                fi
+                ;;
+                
+        reload)
+                exit 3
+                ;;
+                
+        status)
+                status_of_proc $nodeRun "Termulator"
+                ;;
+        *)
+                echo "Usage: $0 {start|stop|restart|try-restart|force-reload|status}"
+                exit 2
+                ;;
+         
+esac
+

@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	 <title>Data Center Monitoring System V.2 </title>
+	 <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+	 <link rel="stylesheet" type="text/css" href="../css/rangeslider.css">
+	 <link rel="stylesheet" type="text/css" href="../css/default.css"/>
+
+     <script type="text/javascript" src="../js/jquery.js" ></script>
+     <script type="text/javascript" src="../js/jquery-ui.js"></script>
+     <script type="text/javascript" src="../js/jqscript.js"></script>
+	 <script type="text/javascript" src="../js/gjquery.js"></script> 
+	 				
+	 <script type="text/javascript" src="../js/jquery.min.js"></script> 
+	 <script type="text/javascript" src="../js/jquery.flow.js"></script> 
+	 <script type="text/javascript" src="../js/w3data.js"></script>
+	 
+	 <script type="text/javascript" src="../js/radar/raphael-min.js"></script>
+	 <script type="text/javascript" src="../js/radar/stats.js"></script> 
+	 <script type="text/javascript" src="../js/seven/segment-display.js"></script>
+     <script type="text/javascript" src="../js/seven/display7.js"></script>
+     <script type="text/javascript" src="../js/slider/rangeslider.js"></script>
+     <script type="text/javascript" src="../js/slider/rangeslider.min.js"></script>
+
+   
+   
+	 <script src="/socket.io/socket.io.js"></script>
+     <script type="text/javascript" src="../js/chrisdonbot-data-controller.js"></script>
+     <!--   <script type="text/javascript" src="js/slider/slider.js"></script>  -->
+  
+</head>
+    
+   
+<body>
+	
+<div class="dscmscontainer">
+	<div class="dscmswrapper">
+		
+	<!--- Main Header --------------------------------------------------------------------------------------------->
+	<div w3-include-html="../main.html"></div>
+	
+	<!--- Main Header --------------------------------------------------------------------------------------------->
+		<div class="pagecontent">
+			<div id="macrobot-data-controller" class="projects">
+	<!--- ChrisDon Bar --------------------------------------------------------------------------------------------->			
+	
+	<div class="leftsidebar">
+				<div class="panels">
+					<div id="infosys">
+						<div class="title-sb"><h1 id="title-info">Information System</h1></div>
+							<nav class="sidemenu_stat">
+								<div class="menu-item"><div class="parent-submenu"  id="mini_server"><div>Mini Server</div></div>
+									<ul>
+										<li><a href="../xentrino/aquisition.html" class="real_data_aquisition" id="ms-rta">Real Time Aquisition</a></li>
+										<li><a href="../xentrino/settings.html" class="system_setting" id="ms-ss">System Setting</a></li>
+									</ul>
+								</div>
+									<div class="menu-item"><div class="parent-submenu"  id="chris_bot"><div>MacRonBot</div></div>
+										<ul>
+											<li><a href="../chrisdon/aquisition.html" class="real_data_aquisition" id="cdb-rta">Real Time Aquisition</a></li>
+											<li><a href="../chrisdon/control.html" class="data_controller" id="cdb-dc">Data Controller</a></li>
+											<li><a href="../chrisdon/settings.html" class="system_setting" id="cdb-ss">System Setting</a></li>
+										</ul>
+									</div>
+									<div class="menu-item"><div class="parent-submenu" id="macro_bot"><div>MacronBot</div></div>
+										<ul>
+											<li><a href="../macron/aquisition.html" class="real_data_aquisition" id="mb-rta">Real Time Aquisition</a></li>
+											<li><a href="../macron/control.html" class="data_controller" id="mb-dc">Data Controller</a></li>
+											<li><a href="../macron/settings.html" class="system_setting" id="mb-ss">System Setting</a></li>
+										</ul>
+									</div>
+							</nav>
+							<div class="footer-sb"></div>
+					</div>
+				</div>
+		
+			 
+				<div class="panels"><!--Panels -->
+					<div id="statusview">
+						<div class="title-sb"><h1>Status</h1></div>
+							<ul class="sidemenu">
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idhmdty0" name="hmdty0"  checked="checked"  disabled/><label for="idhmdty0"></label></div><div class="label">Humidity-A    </div></li>
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idtemp0"  name="temp0"   checked="checked"  disabled/><label for="idtemp0"></label></div><div  class="label">Temperature-A </div></li>
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idhmdty1" name="hmdty1"  checked="checked"  disabled/><label for="idhmdty1"></label></div><div class="label">Humidity-B    </div></li>
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idtemp1"  name="temp1"   checked="checked"  disabled/><label for="idtemp1"></label></div><div  class="label">Temperature-B </div></li>
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idhmdty2" name="hmdty2"  checked="checked"  disabled/><label for="idhmdty2"></label></div><div class="label">Humidity-C    </div></li>
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idtemp2"  name="temp2"   checked="checked"  disabled/><label for="idtemp2"></label></div><div  class="label">Temperature-C </div></li>
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idhmdty3" name="hmdty3"  checked="checked"  disabled/><label for="idhmdty3"></label></div><div class="label">Humidty-D     </div></li>
+							<li class="stat_item"><div class="switch"><input type="checkbox" id="idtemp3"  name="temp3"   checked="checked"  disabled/><label for="idtemp3"></label></div><div  class="label">Temperature-D </div></li>
+							
+						</ul>
+						<div class="footer-sb"></div>
+					</div><!--statusView -->
+					
+				</div><!--Panels -->
+				
+				<div class="panels"><!--Panels -->
+					<div id="infosys" >
+						 <div class="title-sb"><h1 >Notification message</h1></div>
+						  <div class="warn-disp floatLeft">
+							Warning. Video is not activated yet.
+							Warning. Video is not activated yet.
+							Warning. Video is not activated yet.
+						  </div>	
+							  <div class="videoctrlbtns floatLeft">
+								<span id="videost" class="vbtns push_button blue floatLeft">Video Stream</span>
+								<span id="picsnap" class="vbtns push_button blue floatLeft">Picture Snapshot</span>
+								<div class='clear' style='clear:both;'></div>
+							  </div>
+						<div class="radio-btn">
+							   <span>
+							  	    <input type="radio" id="rbtn1" name="vsrctrl" value="vsone"><label>Vs Radio 1</label>
+							    	<input type="radio" id="rbtn2" name="vsrctrl" value="vstwo"><label>Vs Radio 2</label>
+							   </span>
+							   <span>
+								   <input type="radio" id="rbtn3" name="psrctrl" value="psone"><label>Ps Radio 1</label>
+								   <input type="radio" id="rbtn4" name="psrctrl" value="pstwo"><label>Ps Radio 2</label>	
+							  </span>
+				     </div>
+						<div class="footer-sb"></div>
+				  </div> <!--Video Content -->
+			 </div>  <!--Panels -->
+	
+		</div>	<!--<div class="leftsidebar">  -->
+			
+	<!--- ChrisDon Bar --------------------------------------------------------------------------------------------->			
+				<div class="rightsidebar">
+					<div id="hdr-disparea">
+						<div id="sys-rtd">
+							<div class="label-stat"><span>System:</span>MacRonBot</div>
+							<div class="label-stat"><span>Data Controller</span></div>
+						</div>
+						<div id="grph">
+							<div class="label-stat"><span>Graph:</span> Analog Data</div>
+						</div>
+					
+					</div> <!-- hdr-disparea -->
+						
+					<div class="displayarea" style="height:270px; margin-bottom:10px;"></div>
+					    <div class="videoarea" style="margin-bottom:10px;">
+						  <div class="vdcontent" style="height:400px;width:705px;"> <iframe  src="http://localhost:8050/?action=stream" width="575" height="355" > </iframe>  </div>
+							      <div class="metercontent">
+							          
+		                                  <div id="canvas" style="height:400px;"></div>
+	                               </div>    
+						       <div class='clear' style='clear:both;'></div>  
+						</div> <!-- videoarea -->
+						
+						<div class='clear' style='clear:both;'></div>
+					</div><!-- displayarea -->
+<!--- ChrisDon BUttons --------------------------------------------------------------------------------------------->			
+						<div class="controller_buttons">
+									
+							  <div class="buttonsarea" id="data-ctrls">
+										<!--<div id ="media_ctrl">
+											<div id="phovid">
+												<div id="photo" class="btn">Photo</div>
+												<div id="vidcam" class="btn" >Video</div>
+											</div>
+											<div id="record" class="btn">Record</div>
+										</div>-->
+									
+										 <div id ="motion_ctrl" style="margin-left:50px;">
+												<div id="fwd" class="push_button blue motion-btns"><span>FORWARD</span></div>
+													<div class="lsr">
+														<div id="left" class="push_button blue motion-btns"><span>LEFT</span></div>
+														<div id="stop" class="push_button blue motion-btns"><span>STOP</span></div>
+														<div id="right" class="push_button blue motion-btns"><span>RIGHT</span></div>
+													</div>
+													<div id="bcwd" class="push_button blue motion-btns"><span>BACK</span></div>
+													<div class="spd">
+														<div id="tlt" class="push_button blue motion-btns"><span>TURN LEFT</span></div>
+														<div id="trt" class="push_button blue motion-btns"><span>TURN RIGHT</span></div>
+													</div>
+										</div><!--<div id ="motion_ctrl">-->
+											 
+										<div class="meter_ctr"><!--  <div class="meter_ctr">	-->								  
+												 <div id="asf_ctrl">
+													<canvas  style="margin-left:50px;" id="temp" width="200" height="200"
+														data-type="canv-gauge"
+														data-title="Acceleration"
+														data-min-value="20"
+														data-max-value="100"
+														data-major-ticks="20 40 50 60 70 80 90 100"
+														data-minor-ticks="10"
+														data-stroke-ticks="true"
+														data-units=" Meter/Sec"
+														data-value-format="3.1"
+														data-glow="true"
+														data-animation-delay="10"
+														data-animation-duration="200"
+														data-animation-fn="bounce"
+														data-colors-needle="#f00 #00f"
+														data-highlights="20 70 #06B70F, 70 90 #F5E940, 90 100 #FB0808"
+														<!--data-highlights="40 80 #06B70F, 80 90 #F5E940, 90 100 #FB0808" -->
+													</canvas>
+													<!-----Slider in the middle -->
+													    <div id="js-example-orientation" style="position: absolute; margin-left:290px; margin-top:-180px;">
+														
+														     <input style="position: absolute;  width: 1px; height: 1px; overflow: hidden; opacity: 0;" 
+															 min="0" max="255" data-rangeslider="" data-orientation="vertical" type="range">
+															 <output style="display:inline-block; margin-bottom: 0;">0</output> 
+															<div style="height: 170px;" class="rangeslider__fill"></div>
+														</div> 
+															 
+													  </div>
+
+													<canvas id="temp2" style= "position:absolute;margin-left:-500px;margin-top:740px;" width="200" height="200" 
+														data-type="canv-gauge"
+														data-title="Electricity"
+														data-min-value="20"
+														data-max-value="100"
+														data-major-ticks="20 40 50 60 70 80 90 100"
+														data-minor-ticks="10"
+														data-stroke-ticks="true"
+														data-units=" VU Meter"
+														data-value-format="3.1"
+														data-glow="true"
+														data-animation-delay="10"
+														data-animation-duration="200"
+														data-animation-fn="bounce"
+														data-colors-needle="#f00 #00f"
+														data-highlights="20 70 #06B70F, 70 90 #F5E940, 90 100 #FB0808"
+														<!--data-highlights="40 80 #06B70F, 80 90 #F5E940, 90 100 #FB0808" -->
+													</canvas>	 	
+												 </div>
+													
+												  <div id ="asf_ctrl" style="position: inherit;margin-left:1000px;margin-top:-210px">
+													 <div id="actv_txt">  
+															<div id="actv" class="push_button blue motion-btns">Active</div>
+														<!--	<div id="gaugeinput"><input type="text" id="gauge"/></div>-->
+                                                                  <div style="width: 216px; height: 126px; position: relative; background: transparent url(/js/seven/plexiglas.png) no-repeat top left;margin-left:30px;">
+																	 <div style="position: absolute; left: 38px; top: 33px; width: 120px; height: 34px;">
+																	   <canvas id="display7" width="120" height="34"></canvas>
+																	 </div>
+															      </div>	<!-- seven segment style-->													  
+															 </div>	<!--actv-->							
+												            <div class="spd" style="margin-top:-30px;">
+															     <div id="slow" class="push_button blue motion-btns"><span>SLOW</span></div>
+															     <div id="down" class="push_button blue motion-btns"><span>DOWN</span></div>
+														  </div> <!-- spd -->
+														</div> <!--activ txt-->  
+												 </div> <!--<div id ="asf_ctrl">  -->
+											            
+								 </div><!--  <div class="meter_ctr">	-->			                  										   
+							  </div><!-- <div class="buttons_area">  -->	  
+						</div>  <!--<div class="controller_buttons">  -->
+							
+<!--- ChrisDon Buttons --------------------------------------------------------------------------------------------->		
+				</div><!-- rightsidebar -->
+				<div class='clear' style='clear:both;'></div>
+	      </div><!-- chrisdonbot-data-controller -->
+			
+	  </div><!-- pagecontent-->
+
+  </div><!-- dscmswrapper-->
+	
+<!--- ChrisDon Footer --------------------------------------------------------------------------------------------->			
+	<div class='footer'></div>	
+<!--- ChrisDon Footer --------------------------------------------------------------------------------------------->	
+	
+</div><!-- dscmcontainer-->
+    
+	
+	<script type="text/javascript" src="../js/radar/radar.js"></script> 	
+  <!--  <script type="text/javascript" src="js/gauge/jquery.min.js"></script> -->
+   <script type="text/javascript" src="../js/gauge/gauge.min.js"></script> 
+     
+   <script>
+    w3IncludeHTML();
+   </script>
+  
+</body>
+</html>

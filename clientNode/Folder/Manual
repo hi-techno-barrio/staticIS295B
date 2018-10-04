@@ -1,0 +1,101 @@
+
+
+apt-get install mysql-server mysql-client  php5 apache2
+apt-get install php5-mysql
+apt-get install sendmail
+
+Troubleshooting for PHP serial and Arduino
+
+1) useradd -G dialout www-data
+2) chmod +x script.php
+3) restart service apache2 restart
+Reference: http://docs.brewpi.com/manual-brewpi-install/setup-users-permissions.html
+
+PHP Serial Class Trouble Shooting
+
+//checking the availability of the usb serial port
+1) stty -F /dev/ttyUSB0
+
+//bruteforcing the r+w of the USB serial port
+2)  chmod a+rw /dev/ttyUSB0
+
+// eliminate some erros to use in the web script
+3) chmod +s /dev/ttyUSB0
+
+// add apache user "www-data" in debian to the group dialout
+4) useradd -G dialout www-data
+
+// try to make /dev/ttyUSB0 write-able
+5) chmod 777 /dev/ttyUSB0
+
+// add user www-data to the group dialout
+6) adduser www-data dialout
+
+
+I) Kill vnc server
+vncserver -kill :1
+II) kill port
+sudo kill -9 $(sudo lsof -t -i:6080)
+fuser -n tcp -k 9001 
+-sudo netstat -lpn |grep :6080
+--sudo kill -9 PID
+sh killport 6080 
+III)
+
+II) Start/Restart
+Install TightVncServer
+
+sudo apt-get update
+sudo apt-get install tightvncserver
+tightvncserver
+
+The first time this is run you must enter a password and verify it. No need to enter a view only password.
+
+To configure for auto start as a service when the Pi boots up:
+
+Open nano (text editor) to create a file to auto start Tight VNC Server sudo nano /etc/init.d/tightvncserver
+
+Type in the following (or copy and paste):
+
+#!/bin/sh
+# /etc/init.d/tightvncserver
+# Set the VNCUSER variable to the name of the user to start tightvncserver under
+VNCUSER='pi'
+case "$1" in
+  start)
+    su $VNCUSER -c '/usr/bin/tightvncserver :1'
+    echo "Starting TightVNC server for $VNCUSER"
+    ;;
+  stop)
+    pkill Xtightvnc
+    echo "Tightvncserver stopped"
+    ;;
+  *)
+    echo "Usage: /etc/init.d/tightvncserver {start|stop}"
+    exit 1
+    ;;
+esac
+exit 0
+
+Press Ctrl+x, then y to save and Enter to keep the same file name.
+
+Edit the permissions of this file to make it executable and active:
+
+sudo chmod 755 /etc/init.d/tightvncserver
+sudo update-rc.d tightvncserver defaults
+
+Reboot to test sudo reboot
+
+Install the vnc client for your OS and try to connect once the Pi has rebooted!
+
+For Windows: TightVNC Client for example . No need to install server.
+
+Start The VNC Client Connect using the IP address from the top of this post. Change the IP address for yours. The port number is a number of posts is only listed as 2 digits. This is short hand and if you are using the above script your pi is running on port 1 then you should use 5901. If 2, then 5902 etc.
+
+192.168.1.123:5901
+
+
+
+
+
+

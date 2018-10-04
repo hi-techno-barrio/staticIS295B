@@ -1,0 +1,10 @@
+Troubleshooting Errors
+
+[Errors]
+mapping control for Disable video processing
+UVCIOC_CTRL_MAP - Error: Inappropriate ioctl for device
+mapping control for Raw bits per pixel
+UVCIOC_CTRL_MAP - Error: Inappropriate ioctl for device
+
+[Troubleshooting]
+the ps3 camera doesn't seem to support mjpeg, but it does support YUYV format. Try initialising the stream with the -y flag. eg:
