@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mini Server</title>
+<link rel="stylesheet" type="text/css" href="../../css/default.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css"/>
+<script type="text/javascript" src="../../js/library/jquery.js" ></script>
+<script type="text/javascript" src="../../js/library/jquery-ui.js"></script>
+<script type="text/javascript" src="../../js/custom/jqscript.js"></script>
+
+</head>
+
+<body>
+<div class="dscmscontainer">
+	<div class="dscmswrapper">
+		<?php 
+			$globalPath = "../";
+			include("{$globalPath}main/header.php");
+		?>
+		<div class="pagecontent">
+			<div id="miniserver-system-setting"  class="projects">
+					<?php include("{$globalPath}miniserver/miniserverbar.php");?>
+				<div class="rightsidebar">
+					<div id="hdr-disparea">
+
+
+						<div id="sys-rtd">
+							<div class="label-stat"><span>System:</span>MINI SERVER</div>
+							<div class="label-stat"><span>System Setting</div>
+						</div>
+						<div id="grph">
+							<div class="label-stat"><span>Graph:</span> TEMPERATURE</div>
+						</div>
+					</div>
+					<div class="displayarea">
+                              <!-----------------------------------------------    ------  -->
+                                         <?php
+                                           echo $_SERVER['PHP_SELF'] 	;
+                                           echo $_SERVER['GATEWAY_INTERFACE'] ;
+                                           echo $_SERVER['SERVER_ADDR'] ;
+                                           echo $_SERVER['SERVER_NAME'] ;
+                                           echo $_SERVER['SERVER_SOFTWARE'] ;
+                                           echo $_SERVER['SERVER_PROTOCOL'] ;
+                                           echo $_SERVER['REQUEST_METHOD'] ;
+                                           echo $_SERVER['REQUEST_TIME'] ;
+                                           echo $_SERVER['QUERY_STRING'] ;
+                                           echo $_SERVER['HTTP_ACCEPT'] ;
+                                           echo $_SERVER['HTTP_ACCEPT_CHARSET'] 	;
+                                           echo $_SERVER['HTTP_HOST'] 	;
+                                           echo $_SERVER['HTTP_REFERER'] ;
+                                           echo $_SERVER['HTTPS'] ;
+                                           echo $_SERVER['REMOTE_ADDR'] 	;
+                                           echo $_SERVER['REMOTE_HOST'] 	;
+                                           echo $_SERVER['REMOTE_PORT'] 	;
+                                           echo $_SERVER['SCRIPT_FILENAME'] ;
+                                           echo $_SERVER['SERVER_ADMIN'] 	;
+                                           echo $_SERVER['SERVER_PORT'] 	;
+                                           echo $_SERVER['SERVER_SIGNATURE'] 	;
+                                           echo $_SERVER['PATH_TRANSLATED'] ;	
+                                           echo $_SERVER['SCRIPT_NAME'] 	;
+                                           echo $_SERVER['SCRIPT_URI'];
+                                          ?> 
+                         <!-----------------------------------------------    ------  -->
+                                  </div>
+					
+				</div>
+				<div class='clear' style='clear:both;'></div>
+			</div>
+		</div>
+	</div>
+	<?php include("{$globalPath}main/footer.php");?>
+</div>
+</body>
+</html>
